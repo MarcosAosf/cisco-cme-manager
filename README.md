@@ -1,12 +1,26 @@
 # Cisco CME Manager (Telefonia IP & Ramais) 📞
 
-Uma aplicação desktop moderna com interface gráfica desenvolvida em **CustomTkinter** e engine de automação de rede com **Netmiko (SSH)**, projetada para administração ágil, inventário dinâmico e resolução de problemas em roteadores de voz **Cisco Communications Manager Express (CME)** suportando telefones **SIP** e **SCCP (Skinny)**.
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-blue.svg?logo=windows)](https://microsoft.com/windows)
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg?logo=python)](https://python.org)
+[![UI: CustomTkinter](https://img.shields.io/badge/UI-CustomTkinter%20Modern%20Dark-A855F7.svg)](https://github.com/TomSchimansky/CustomTkinter)
+[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
+
+Uma aplicação desktop nativa para **Windows (10 / 11)** com interface gráfica moderna desenvolvida em **CustomTkinter** e engine de automação de rede com **Netmiko (SSH)**, projetada para administração ágil, inventário dinâmico e resolução de problemas em roteadores de voz **Cisco Communications Manager Express (CME)** suportando telefones **SIP** e **SCCP (Skinny)**.
+
+---
+
+## 🪟 Desenvolvido para Windows
+
+O projeto foi construído e homologado nativamente no **Windows**, contando com:
+- **Interface Gráfica Windows Dark Mode:** Janelas fluidas, controles modernos e adaptação DPI nativa do Windows via `CustomTkinter`.
+- **Launcher de Execução Direta (`run.bat`):** Permite iniciar a aplicação com um simples **duplo clique**, sem necessidade de abrir o terminal manualmente.
+- **Diagnóstico com Ping Nativo do Windows:** Envio de pacotes ICMP adaptados aos parâmetros do comando `ping` do Windows (`-n 1 -w 1000`).
 
 ---
 
 ## 🚀 Funcionalidades Principais
 
-- **Conexão SSH Segura:** Autenticação via SSH com compatibilidade para cifras e algoritmos legados e modernos do Cisco IOS (`cisco_ios`).
+- **Conexão SSH Segura:** Autenticação via SSH com suporte completo a algoritmos legados e modernos do Cisco IOS (`cisco_ios`).
 - **Dashboard de Ramais & Telefones:**
   - Descoberta e parsing dinâmico de `voice register dn` (SIP) e `ephone-dn` (SCCP).
   - Status em tempo real de registro dos aparelhos (`REGISTERED` / `UNREGISTERED`).
@@ -22,52 +36,49 @@ Uma aplicação desktop moderna com interface gráfica desenvolvida em **CustomT
 
 ---
 
-## 📋 Pré-requisitos & Instalação
+## ⚡ Instalação e Execução no Windows (Rápido)
 
-### Requisitos:
-- **Python 3.8+** instalado.
-- Conectividade de rede (IP/SSH) até o roteador Cisco de voz.
+### 1. Pré-requisitos
+- Ter o **Python 3.8+** instalado no Windows (baixe em [python.org](https://www.python.org/downloads/)).
+  > ⚠️ Durante a instalação do Python, marque obrigatoriamente a opção **"Add Python to PATH"**.
 
-### Instalação:
-1. Clone o repositório:
-```bash
+### 2. Clonar ou Baixar o Projeto
+```cmd
 git clone https://github.com/MarcosAosf/cisco-cme-manager.git
 cd cisco-cme-manager
 ```
 
-2. Crie e ative um ambiente virtual (recomendado):
-```bash
-python -m venv venv
-# No Windows:
-venv\Scripts\activate
-# No Linux/macOS:
-source venv/bin/activate
-```
-
-3. Instale as dependências:
-```bash
+### 3. Instalar as Dependências
+Abra o Prompt de Comando (CMD) ou PowerShell na pasta do projeto e execute:
+```cmd
 pip install -r requirements.txt
 ```
 
+### 4. Executar
+Você pode rodar de duas formas no Windows:
+- **Opção A (Mais fácil):** Dê um **duplo clique** no arquivo **`run.bat`**.
+- **Opção B (Via CMD / PowerShell):**
+  ```cmd
+  py main.py
+  :: ou
+  python main.py
+  ```
+
 ---
 
-## ⚡ Como Executar
+## 💻 Como Usar
 
-Execute o arquivo principal:
-```bash
-python main.py
-```
-
-1. Informe o **IP do Roteador Cisco CME**, a porta SSH (padrão: `22`), o **usuário** e a **senha**.
-2. Clique em **Conectar**.
-3. O sistema fará a varredura automática dos ramais e exibirá a tabela interativa.
+1. Na barra superior de conexão, informe o **IP do Roteador Cisco CME** (ex.: `192.0.2.1`), a **Porta SSH** (padrão: `22`), o **Usuário** e a **Senha**.
+2. Clique no botão **Conectar**.
+3. O sistema fará a leitura automática dos telefones registrados e listará todos os ramais na tabela central.
+4. Utilize a barra de pesquisa para filtrar ramais ou clique com o botão direito / nos botões de ação para reiniciar aparelhos ou editar descrições.
 
 ---
 
 ## 🔒 Segurança & Boas Práticas
 
 - **Zero Armazenamento de Senhas:** Esta aplicação segue a política de segurança de memória volátil — senhas não são salvas em arquivos locais ou em disco.
-- **Ambientes de Produção:** Nunca compartilhe credenciais, `enable secrets` ou IPs reais de infraestrutura corporativa em commits públicos. Use variáveis de ambiente ou insira credenciais apenas durante a execução interativa.
+- **Ambientes de Produção:** Nunca compartilhe credenciais, `enable secrets` ou IPs reais de infraestrutura corporativa em commits públicos.
 
 ---
 
@@ -75,9 +86,10 @@ python main.py
 
 ```text
 cisco-cme-manager/
+├── run.bat             # Launcher rápido para Windows (duplo clique)
 ├── cme_ssh.py          # Camada de comunicação SSH com Netmiko (Cisco IOS)
 ├── templates.py        # Templates certificados de comandos Cisco CME
-├── main.py             # Interface gráfica moderna (CustomTkinter)
+├── main.py             # Interface gráfica moderna em CustomTkinter
 ├── requirements.txt    # Dependências do projeto
 ├── .gitignore          # Proteção contra versionamento de credenciais e logs
 └── README.md           # Documentação técnica da ferramenta
